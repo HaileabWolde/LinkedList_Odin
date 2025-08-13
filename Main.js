@@ -3,6 +3,10 @@ const linkedLsit = new LinkedList();
 linkedLsit.append(5);
 linkedLsit.append("dog");
 linkedLsit.append("cat");
-linkedLsit.prepend(3);
+linkedLsit.append("fish");
 linkedLsit.size(); // Returns: 4
-console.log(linkedLsit.size()); // Logs: { value: 5, next: null }
+linkedLsit.prepend("bird");
+console.log(linkedLsit.toString()); // Outputs: (5) -> (bird) -> (dog) -> (cat) -> null
+
+
+
