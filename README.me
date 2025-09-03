@@ -5,7 +5,12 @@ pointers to the next in line and data
 pointers but Implmenting this in javascript requires to mimic the behaviour of pointers using 
 objects in Array.
 The Following Functions are Implmented in Our Linked List class:
-1.append(): creates Node object containg value & next if the head is Null, the head will point to this
+1.append(): Creates Node object containg value & next if the head is Null, the head will point to this
 created Node, if the head is not empty we will create a variable and point to the head
 and loop through the object until we find Null or the last One and then add the created Node on last object
 as the next One.
+2. prepend(): Creates Node Object if the head is not pointing any where then the head will be pointing to the
+newly created Node and if there is already head then the Node next will be pointing to the object of the header
+and the header will be pointing to the newly creatd Node.
+3. size(): Creates a variable that points to the head and loops throught the linked List until it is null meaning
+no longer is there linked list node and count the amount of nodes.
