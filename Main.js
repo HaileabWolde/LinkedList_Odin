@@ -6,3 +6,4 @@ linkedList.append('dog');
 linkedList.append('cat');
 linkedList.append('fish');
 linkedList.prepend('bird');
+console.log(linkedList.head)
