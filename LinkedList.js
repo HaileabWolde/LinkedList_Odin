@@ -1,10 +1,11 @@
-import node from "./Node.js";
+import node from './Node.js';
+
 class LinkedList {
     constructor() {
         this.head = null;
     }
- 
- append = (value) => {
+
+    append = (value) => {
         const newNode = node(value, null);
         if (this.head === null) {
             this.head = newNode;
@@ -16,7 +17,8 @@ class LinkedList {
             current.next = newNode;
         }
     }
-    prepend = (value)=>{
+
+    prepend = (value) => {
         const newNode = node(value, null);
         if (this.head === null) {
             this.head = newNode;
@@ -25,7 +27,8 @@ class LinkedList {
             this.head = newNode;
         }
     }
-    size = ()=>{
+
+    size = () => {
         let count = 0;
         let current = this.head;
         while (current !== null) {
@@ -34,8 +37,9 @@ class LinkedList {
         }
         return count;
     }
-    head = () => {
-        return this.head;
+
+   head() {
+        return this.head; // Standard method syntax
     }
     tail = () => {
         if (this.head === null) return null;
@@ -45,33 +49,36 @@ class LinkedList {
         }
         return current;
     }
-    atindex = (value)=>{
-          let current = this.head;
-        for(let i= 0; i < value; i++){
-            if(this.head === null) return null;
+
+    atindex = (value) => {
+        let current = this.head;
+        for (let i = 0; i < value; i++) {
+            if (current === null) return null;
             current = current.next;
         }
         return current;
     }
-    pop = ()=>{
-      let current = this.head;
-      let nextNode = null;
-      if (current === null) return null; // If the list is empty
+
+    pop = () => {
+        let current = this.head;
+        let nextNode = null;
+        if (current === null) return null; // If the list is empty
         if (current.next === null) {
             this.head = null; // If there's only one node, set head to null
             return;
         }
-      while(current.next !== null){
-          nextNode = current;
-          current = current.next;
-      }
-        if(nextNode !== null){
+        while (current.next !== null) {
+            nextNode = current;
+            current = current.next;
+        }
+        if (nextNode !== null) {
             nextNode.next = null;
         } else {
             this.head = null;
         }
     }
-    contains = (value)=>{
+
+    contains = (value) => {
         let current = this.head;
         while (current !== null) {
             if (current.value === value) {
@@ -80,49 +87,56 @@ class LinkedList {
             current = current.next;
         }
         return false;
-    } 
-    find = (value)=>{
-        
+    }
+
+    find = (value) => {
         let current = this.head;
         let index = 0;
-        while(current != null && current.value != value){
+        while (current != null && current.value != value) {
             index++;
             current = current.next;
         }
-        if(current != null && current.value === value){
+        if (current != null && current.value === value) {
             return index;
+        } else {
+            return null;
         }
-        else{
-            return null
+    }
+
+    toString = () => {
+        let tmp = this.head;
+        let stringList = '';
+        while (tmp != null) {
+            stringList += `(${tmp.value}) -> `;
+            tmp = tmp.next;
         }
+        return (stringList += 'null');
     }
-    toString() {
-    let tmp = this.head;
-    let stringList = "";
-    while (tmp != null) {
-      stringList += `(${tmp.value}) -> `;
-      tmp = tmp.next;
-    }
-    return (stringList += "null");
-  }
-  insertAt = (value, index) => {
-    let newNode = node(value, null);
-    let current = this.head;
-    if (index < 0 || index > this.size()) {
-      throw new Error("Index out of bounds");
-    }
-    for (let i = 0; i < index; i++){
-        if (current === null) {
-            throw new Error("Index out of bounds");
+
+    insertAt = (value, index) => {
+        const newNode = node(value, null);
+        if (index < 0 || index > this.size()) {
+            throw new Error('Index out of bounds');
         }
-        current = current.next;
+        if (index === 0) {
+            newNode.next = this.head;
+            this.head = newNode;
+            return;
+        }
+        let current = this.head;
+        for (let i = 0; i < index - 1; i++) {
+            if (current === null) {
+                throw new Error('Index out of bounds');
+            }
+            current = current.next;
+        }
+        newNode.next = current.next;
+        current.next = newNode;
     }
-    newNode.next = current.next
-    current.next = newNode;
-}
-    removeAt = (index) =>{
+
+    removeAt = (index) => {
         if (index < 0 || index >= this.size()) {
-            throw new Error("Index out of bounds");
+            throw new Error('Index out of bounds');
         }
         if (index === 0) {
             this.head = this.head.next;
@@ -130,12 +144,11 @@ class LinkedList {
         }
         let current = this.head;
         let nextNode = null;
-
         for (let i = 0; i < index; i++) {
             if (current === null || current.next === null) {
-                throw new Error("Index out of bounds");
+                throw new Error('Index out of bounds');
             }
-            nextNode = current
+            nextNode = current;
             current = current.next;
         }
         if (nextNode !== null) {
@@ -143,25 +156,5 @@ class LinkedList {
         }
     }
 }
-/*
- const LinkedList = (function (){
-   let  head = null;
-        const append = (value) => {
-            const newNode = node(value, null);
-            if(head === null){
-                head = newNode;
-            } else {
-                let current = head;
-                while(current.next !== null){
-                    current = current.next;
-                }
-                current.next = newNode;
-            }
-        };
-        const getHead = () => head;
-        return {
-            append,
-            getHead
-        }
-})();*/
+
 export default LinkedList;
